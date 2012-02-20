@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="css/iphone.css" type="text/css" />
+    <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="css/ipad.css" type="text/css" />
+    <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 2)" type="text/css" href="css/iphone4.css" />
+
+    <script type="text/javascript" charset="utf-8" src="js/phonegap-1.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        var cracks = 0;
+        var score = 0;
+
+        function update_score(val) {
+            score += val;
+            $("#score").html(score);
+        }
+
+        function onBodyLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+            //Uncomment next line and comment out prev line to run it in browser
+            //onDeviceReady();
+            //deviceready event never fire on desktop browser :)
+        }
+
+        function onDeviceReady() {
+            $("#mask").click(function(e){cococo(e);});
+            $("#play_again").click(function(e){
+                                   $('.crack').remove();
+                                   $('#egg').removeClass('chick').css('z-index', 50).offset({left: '20'});
+                                   cracks = 0;
+                                   });
+            document.addEventListener('touchmove', function(e){ e.preventDefault(); });
+        }
+
+        function cococo(e) {
+            cracks += 1;
+            if (cracks > 7) {
+                return;
+            }
+            if (cracks == 7) {
+                PhoneGap.exec("SoundPlug.play", "banzay.wav");
+                $('#egg').removeClass('cracked');
+                $('#egg').addClass('chick').css('z-index', 250).animate({left: '-=320'}, 2000);
+            }
+            if (cracks == 6) {
+                PhoneGap.exec("SoundPlug.play", "eggcrush.m4a");
+                $('.crack').remove();
+                $('#egg').addClass('cracked');
+            }
+            if (cracks < 6) {
+                update_score(10);
+                PhoneGap.exec("SoundPlug.play", "cococo.wav");
+                var $crack = $("<div class='crack'></div>");
+                $("#egg").append($crack);
+                $crack.offset({top: e.screenY-50, left: e.screenX-50}); //{ top: 110 + Math.random()*100, left: 40 + Math.random()*100 });
+                $('#egg').animate({top: '-=1'}, 20, function() {
+                              $('#egg').animate({top: '+=1'}, 20);
+                               });
+                }
+        }
+    </script>
+  </head>
+  <body onload="onBodyLoad()">
+      <div id="egg"></div>
+      <div id="mask"></div>
+      <div id="play_again"></div>
+      <div id="score">0</div>
+  </body>
+</html>

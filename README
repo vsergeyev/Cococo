@@ -1,0 +1,25 @@
+Cococo
+======
+
+Cococo is an iOS game. Goal is to hatch a chick from an egg.
+Game is available on AppStore for free.
+http://itunes.apple.com/us/app/cococo/id502359806?ls=1&mt=8
+
+It is created with Phonegap framework.
+So you can easiely port it on Android or so.
+
+Main code is in JS, and you can modify index.html
+to run game in your desktop browser.
+Please look into index.html for instructions.
+
+I used images and sounds, found on the Web.
+If you're the auhor of it - please let me know,
+so I will be able to include you in credits.
+
+Suggestions?
+============
+
+Contact me at pydevside@gmail.com
+
+Thank you
+=========

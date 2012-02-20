@@ -1,0 +1,20 @@
+body {
+    background-size: 320px 480px;
+    background-image: url('../i/mask.png');
+}
+
+#egg {
+    background-size: 280px 420px;
+    background-image: url('../i/egg560x840.png');
+}
+
+#mask {
+    background-size: 320px 480px;
+    background-image: url('../i/mask640x960.png');
+}
+
+
+#egg.cracked {
+    background-size: 280px 420px;
+    background-image: url('../i/egg560x840_cracked.png');
+}
